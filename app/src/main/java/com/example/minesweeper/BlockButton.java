@@ -30,7 +30,7 @@ public class BlockButton extends androidx.appcompat.widget.AppCompatButton {
     }
     public void toggleFlag(BlockButton[][] buttons, int x, int y){
         if(choose==1) {
-            if (flag) {
+            if (flag) { 
                 flag = false;
                 buttons[x][y].setText("");
                 buttons[x][y].setEnabled(true);
