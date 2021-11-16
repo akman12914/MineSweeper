@@ -64,15 +64,20 @@ public class MainActivity extends AppCompatActivity {
 //        iv.setImageResource(R.drawable.mine);
 
         Random random = new Random();
+        Integer[] random_x=new Integer[10];
+        Integer[] random_y=new Integer[10];
 
         for (int i = 0; i < 10; i++) {
-            buttons[random.nextInt(10)][random.nextInt(10)].mine=true;
+            random_x[i]=random.nextInt(9);
+            random_y[i]=random.nextInt(9);
+            for(int j=0; j<i; j++){
+                if(random_x[i]==random_x[j] && random_y[i]==random_y[j]){
+                    i--;
+                    continue;
+                }
+            }
+            buttons[random_x[i]][random_y[i]].mine=true;
         }
-
-
-
-
-
     }
 
 }

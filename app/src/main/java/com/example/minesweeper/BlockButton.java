@@ -51,10 +51,21 @@ public class BlockButton extends androidx.appcompat.widget.AppCompatButton {
         if (!buttons[x][y].isEnabled()) return false;
         if (buttons[x][y].mine) //지뢰일경우
         {
+//            if(choose==0) {
+//                img.setBounds(0, 0, 60, 60);
+//                buttons[x][y].setCompoundDrawables(img, null, null, null);
+////            buttons[x][y].setBackgroundColor(Color.RED);
+//                return true;
+//            }
             if(choose==0) {
                 img.setBounds(0, 0, 60, 60);
-                buttons[x][y].setCompoundDrawables(img, null, null, null);
-//            buttons[x][y].setBackgroundColor(Color.RED);
+                for(int i=0; i<9; i++){
+                    for(int j=0; j<9; j++){
+                        if(buttons[i][j].mine) {
+                            buttons[i][j].setCompoundDrawables(img, null, null, null);
+                        }
+                    }
+                }
                 return true;
             }
         }
