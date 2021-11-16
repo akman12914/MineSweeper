@@ -33,10 +33,12 @@ public class BlockButton extends androidx.appcompat.widget.AppCompatButton {
             if (flag) {
                 flag = false;
                 buttons[x][y].setText("");
+                buttons[x][y].setEnabled(true);
                 return;
             } else {
                 flag = true;
                 buttons[x][y].setText("\uD83C\uDFF4");
+                buttons[x][y].setEnabled(true);
                 return;
             }
         }else{
@@ -48,21 +50,24 @@ public class BlockButton extends androidx.appcompat.widget.AppCompatButton {
 
 
         int cnt; // 주변 지뢰의 개수, cnt가 0이면 그냥 아무 표시없고 0이상일때만 숫자 표시해주면 될듯
-        if (!buttons[x][y].isEnabled()) return false;
+        if (!buttons[x][y].isEnabled()) return false; //클릭불가능한 곳 누르면 무시하는거
+        if(buttons[x][y].flag==true) return false; //깃발있는곳 누르면 무시하는거
         if (buttons[x][y].mine) //지뢰일경우
         {
 //            if(choose==0) {
 //                img.setBounds(0, 0, 60, 60);
 //                buttons[x][y].setCompoundDrawables(img, null, null, null);
-////            buttons[x][y].setBackgroundColor(Color.RED);
+//            buttons[x][y].setBackgroundColor(Color.RED);
 //                return true;
 //            }
             if(choose==0) {
                 img.setBounds(0, 0, 60, 60);
                 for(int i=0; i<9; i++){
                     for(int j=0; j<9; j++){
+                        buttons[i][j].setEnabled(false); //폭탄누르면 전체 클릭불가
                         if(buttons[i][j].mine) {
                             buttons[i][j].setCompoundDrawables(img, null, null, null);
+
                         }
                     }
                 }
@@ -82,18 +87,20 @@ public class BlockButton extends androidx.appcompat.widget.AppCompatButton {
         if(x<=0 || x>=8 || y<=0 || y>=8) return false;
 
 
-        if(!buttons[x-1][y+1].mine) breakBlock(buttons, x-1, y+1);
-        if(!buttons[x-1][y].mine) breakBlock(buttons, x-1, y);
-        if(!buttons[x-1][y-1].mine) breakBlock(buttons, x-1, y-1);
+        //깃발 꽂았을때 주변 블록 안열리게 choose==0일때만 주변블록 if문 돌리게 한 것
+        if(choose==0) {
+            if (!buttons[x - 1][y + 1].mine) breakBlock(buttons, x - 1, y + 1);
+            if (!buttons[x - 1][y].mine) breakBlock(buttons, x - 1, y);
+            if (!buttons[x - 1][y - 1].mine) breakBlock(buttons, x - 1, y - 1);
 
-        if(!buttons[x][y+1].mine) breakBlock(buttons, x, y+1);
-        if(!buttons[x][y-1].mine) breakBlock(buttons, x, y-1);
+            if (!buttons[x][y + 1].mine) breakBlock(buttons, x, y + 1);
+            if (!buttons[x][y - 1].mine) breakBlock(buttons, x, y - 1);
 
-        if(!buttons[x+1][y+1].mine) breakBlock(buttons, x+1, y+1);
-        if(!buttons[x+1][y].mine) breakBlock(buttons, x+1, y);
-        if(!buttons[x+1][y-1].mine) breakBlock(buttons, x+1, y-1);
+            if (!buttons[x + 1][y + 1].mine) breakBlock(buttons, x + 1, y + 1);
+            if (!buttons[x + 1][y].mine) breakBlock(buttons, x + 1, y);
+            if (!buttons[x + 1][y - 1].mine) breakBlock(buttons, x + 1, y - 1);
 
-
+        }
         return false;
     }
 
