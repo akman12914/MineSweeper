@@ -66,7 +66,7 @@ public class MainActivity extends AppCompatActivity {
         Random random = new Random();
 
         for (int i = 0; i < 10; i++) {
-            buttons[random.nextInt(9)][random.nextInt(9)].mine=true;
+            buttons[random.nextInt(10)][random.nextInt(10)].mine=true;
         }
 
 

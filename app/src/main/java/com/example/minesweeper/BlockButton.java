@@ -28,22 +28,20 @@ public class BlockButton extends androidx.appcompat.widget.AppCompatButton {
 
 
     }
-
     public void toggleFlag(BlockButton[][] buttons, int x, int y){
-                if(choose==1) {
-                    if (flag) {
-                        flag = false;
-                        buttons[x][y].setText("");
-                        return;
-                    } else {
-                        flag = true;
-                        buttons[x][y].setText("\uD83C\uDFF4");
-                        return;
-                    }
-                }else{
-                    return;
-                }
-
+        if(choose==1) {
+            if (flag) {
+                flag = false;
+                buttons[x][y].setText("");
+                return;
+            } else {
+                flag = true;
+                buttons[x][y].setText("\uD83C\uDFF4");
+                return;
+            }
+        }else{
+            return;
+        }
     }
 
     public boolean breakBlock(BlockButton[][] buttons, int x, int y) {
@@ -53,10 +51,12 @@ public class BlockButton extends androidx.appcompat.widget.AppCompatButton {
         if (!buttons[x][y].isEnabled()) return false;
         if (buttons[x][y].mine) //지뢰일경우
         {
-            img.setBounds(0,0,60,60);
-            buttons[x][y].setCompoundDrawables(img,null,null,null);
+            if(choose==0) {
+                img.setBounds(0, 0, 60, 60);
+                buttons[x][y].setCompoundDrawables(img, null, null, null);
 //            buttons[x][y].setBackgroundColor(Color.RED);
-            return true;
+                return true;
+            }
         }
         cnt = getMineNumber(buttons, x, y);
         buttons[x][y].setEnabled(false); //버튼 비활성화
@@ -66,7 +66,6 @@ public class BlockButton extends androidx.appcompat.widget.AppCompatButton {
 
         if (cnt > 0) //지뢰와의 경계선
         {
-
             return false;
         }
         if(x<=0 || x>=8 || y<=0 || y>=8) return false;
@@ -86,6 +85,8 @@ public class BlockButton extends androidx.appcompat.widget.AppCompatButton {
 
         return false;
     }
+
+
 
 
 
