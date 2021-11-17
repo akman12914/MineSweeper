@@ -28,6 +28,9 @@ public class MainActivity extends AppCompatActivity {
         final TableLayout tableLayout = (TableLayout) findViewById(R.id.table);
         tableLayout.setShrinkAllColumns(true);
         BlockButton[][] buttons = new BlockButton[9][9];
+        TextView test;
+        test = (TextView) findViewById(R.id.textView2);
+        final int[] minenum = {10};
         ToggleButton toggleButton;
         toggleButton = (ToggleButton) findViewById(R.id.toggleButton);
         toggleButton.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
@@ -49,7 +52,17 @@ public class MainActivity extends AppCompatActivity {
                     public void onClick(View v) {
                         BlockButton b = (BlockButton) v.findViewById(v.getId());
                         ((BlockButton) v).breakBlock(buttons, ((BlockButton) v).x, ((BlockButton) v).y);
-                        ((BlockButton) v).toggleFlag(buttons, ((BlockButton) v).x, ((BlockButton) v).y);
+                        //((BlockButton) v).toggleFlag(buttons, ((BlockButton) v).x, ((BlockButton) v).y);
+                        if(((BlockButton) v).toggleFlag(buttons, ((BlockButton) v).x, ((BlockButton) v).y)){
+                            minenum[0]--;
+                            test.setText(String.valueOf(minenum[0]));
+                            if(minenum[0]==0){
+                                minenum[0]++;
+                            }
+                        }else{
+                            minenum[0]++;
+                            test.setText(String.valueOf(minenum[0]));
+                        }
                     }
                 });
                 buttons[i][j].setLayoutParams
@@ -79,5 +92,8 @@ public class MainActivity extends AppCompatActivity {
             buttons[random_x[i]][random_y[i]].mine=true;
         }
     }
+
+
+
 
 }

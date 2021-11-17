@@ -2,7 +2,6 @@ package com.example.minesweeper;
 
 import android.content.Context;
 import android.graphics.drawable.Drawable;
-import android.view.View;
 import android.view.ViewGroup;
 
 public class BlockButton extends androidx.appcompat.widget.AppCompatButton {
@@ -14,7 +13,11 @@ public class BlockButton extends androidx.appcompat.widget.AppCompatButton {
     public boolean mine=false;
     public boolean flag=false;
     public int neighborMines=0;
+
+    //public int minenum = Integer.parseInt((String) txt.getText());
     Drawable img=getContext().getResources().getDrawable( R.drawable.mine );
+
+
     public BlockButton(Context context, int x, int y){
         super(context);
         this.x=x;
@@ -25,30 +28,28 @@ public class BlockButton extends androidx.appcompat.widget.AppCompatButton {
                 TableRow.LayoutParams.WRAP_CONTENT, TableRow.LayoutParams.WRAP_CONTENT,
                 1.0f);*/
         /*this.setLayoutParams(layoutParams);*/
-
-
     }
-    public void toggleFlag(BlockButton[][] buttons, int x, int y){
+    public boolean toggleFlag(BlockButton[][] buttons, int x, int y){
+
+
         if(choose==1) {
-            if (flag) { 
+            if (flag) {
                 flag = false;
                 buttons[x][y].setText("");
                 buttons[x][y].setEnabled(true);
-                return;
+                return false;
             } else {
                 flag = true;
                 buttons[x][y].setText("\uD83C\uDFF4");
                 buttons[x][y].setEnabled(true);
-                return;
+                return true;
             }
         }else{
-            return;
+            return false;
         }
     }
 
     public boolean breakBlock(BlockButton[][] buttons, int x, int y) {
-
-
         int cnt; // 주변 지뢰의 개수, cnt가 0이면 그냥 아무 표시없고 0이상일때만 숫자 표시해주면 될듯
         if (!buttons[x][y].isEnabled()) return false; //클릭불가능한 곳 누르면 무시하는거
         if(buttons[x][y].flag==true) return false; //깃발있는곳 누르면 무시하는거
