@@ -14,6 +14,7 @@ import android.widget.ImageView;
 import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
+import android.widget.Toast;
 import android.widget.ToggleButton;
 
 import java.util.Random;
@@ -36,7 +37,7 @@ public class MainActivity extends AppCompatActivity {
         toggleButton.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
-                if(b){
+                if (b) {
                     BlockButton.choose = 1;
                 }else{
                     BlockButton.choose = 0;
@@ -46,7 +47,7 @@ public class MainActivity extends AppCompatActivity {
         for (int i = 0; i < 9; i++) {
             final TableRow tableRow = new TableRow(this);
             for (int j = 0; j < 9; j++) {
-                buttons[i][j]= new BlockButton(this,i,j);
+                buttons[i][j] = new BlockButton(this, i, j);
                 buttons[i][j].setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
@@ -66,7 +67,7 @@ public class MainActivity extends AppCompatActivity {
                     }
                 });
                 buttons[i][j].setLayoutParams
-                        (new TableRow.LayoutParams(TableRow.LayoutParams.WRAP_CONTENT, TableRow.LayoutParams.WRAP_CONTENT,1.0f));
+                        (new TableRow.LayoutParams(TableRow.LayoutParams.WRAP_CONTENT, TableRow.LayoutParams.WRAP_CONTENT, 1.0f));
                 tableRow.addView(buttons[i][j]);
 
             }

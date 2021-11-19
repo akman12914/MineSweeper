@@ -2,7 +2,9 @@ package com.example.minesweeper;
 
 import android.content.Context;
 import android.graphics.drawable.Drawable;
+import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowManager;
 
 public class BlockButton extends androidx.appcompat.widget.AppCompatButton {
     static public int flags=10; // 총 깃발개수 == 폭탄개수
@@ -68,7 +70,7 @@ public class BlockButton extends androidx.appcompat.widget.AppCompatButton {
                         buttons[i][j].setEnabled(false); //폭탄누르면 전체 클릭불가
                         if(buttons[i][j].mine) {
                             buttons[i][j].setCompoundDrawables(img, null, null, null);
-
+                            showDialog();
                         }
                     }
                 }
@@ -141,7 +143,22 @@ public class BlockButton extends androidx.appcompat.widget.AppCompatButton {
 
         return mineCnt;
     }
+public void showDialog(){
+    gameoverDialog overDialog = new gameoverDialog(getContext(), new CustomDialogClickListener() {
+        @Override
+        public void onOverClick() {
+        }
 
+        @Override
+        public void onCancelClick() {
+        }
+    });
+    overDialog.setCanceledOnTouchOutside(true);
+    overDialog.setCancelable(true);
+    overDialog.getWindow().setLayout(WindowManager.LayoutParams.MATCH_PARENT, WindowManager.LayoutParams.MATCH_PARENT);
+    overDialog.show();
+
+}
     @Override
     public void setLayoutParams(ViewGroup.LayoutParams params) {
         super.setLayoutParams(params);
