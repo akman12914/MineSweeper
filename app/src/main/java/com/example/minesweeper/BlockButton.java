@@ -15,6 +15,7 @@ public class BlockButton extends androidx.appcompat.widget.AppCompatButton {
     public boolean mine=false;
     public boolean flag=false;
     public int neighborMines=0;
+    static public int mines_count=10;
 
     //public int minenum = Integer.parseInt((String) txt.getText());
     Drawable img=getContext().getResources().getDrawable( R.drawable.mine );
@@ -39,11 +40,13 @@ public class BlockButton extends androidx.appcompat.widget.AppCompatButton {
                 flag = false;
                 buttons[x][y].setText("");
                 buttons[x][y].setEnabled(true);
+                if(mines_count<10) mines_count++;
                 return false;
             } else {
                 flag = true;
                 buttons[x][y].setText("\uD83C\uDFF4");
                 buttons[x][y].setEnabled(true);
+                if(mines_count>0) mines_count--;
                 return true;
             }
         }else{
@@ -107,9 +110,13 @@ public class BlockButton extends androidx.appcompat.widget.AppCompatButton {
         return false;
     }
 
+    public String getBlockText(BlockButton[][] buttons, int x, int y){
+        return (String) buttons[x][y].getText();
+    }
 
-
-
+    public String getMines_count(){
+        return Integer.toString(mines_count);
+    }
 
     private int getMineNumber(BlockButton[][] buttons, int row, int col){ // 주변 8칸의 지뢰 개수 반환
         int mineCnt = 0;
