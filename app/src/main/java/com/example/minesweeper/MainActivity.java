@@ -20,7 +20,7 @@ import android.widget.ToggleButton;
 import java.util.Random;
 
 public class MainActivity extends AppCompatActivity {
-//    public ImageView iv = new ImageView(this);
+    //    public ImageView iv = new ImageView(this);
 //    public static Context context_main;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,23 +47,30 @@ public class MainActivity extends AppCompatActivity {
         for (int i = 0; i < 9; i++) {
             final TableRow tableRow = new TableRow(this);
             for (int j = 0; j < 9; j++) {
+
                 buttons[i][j] = new BlockButton(this, i, j);
                 buttons[i][j].setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
                         BlockButton b = (BlockButton) v.findViewById(v.getId());
                         ((BlockButton) v).breakBlock(buttons, ((BlockButton) v).x, ((BlockButton) v).y);
-                        //((BlockButton) v).toggleFlag(buttons, ((BlockButton) v).x, ((BlockButton) v).y);
-                        if(((BlockButton) v).toggleFlag(buttons, ((BlockButton) v).x, ((BlockButton) v).y)){
-                            minenum[0]--;
-                            test.setText(String.valueOf(minenum[0]));
-                            if(minenum[0]==0){
+                        ((BlockButton) v).toggleFlag(buttons, ((BlockButton) v).x, ((BlockButton) v).y);
+  /*                      if(((BlockButton) v).toggleFlag(buttons, ((BlockButton) v).x, ((BlockButton) v).y)){
+                            if(((BlockButton) v).getBlockText(buttons, ((BlockButton) v).x, ((BlockButton) v).y)=="\uD83C\uDFF4") {
+                                minenum[0]--;
+                                test.setText(String.valueOf(minenum[0]));
+                                if (minenum[0] == 0) {
+                                    minenum[0]++;
+                                }
+                            }else {
                                 minenum[0]++;
+                                test.setText(String.valueOf(minenum[0]));
+                                if (minenum[0] >= 10) {
+                                    minenum[0] = 10;
+                                }
                             }
-                        }else{
-                            minenum[0]++;
-                            test.setText(String.valueOf(minenum[0]));
-                        }
+                        } */
+                        test.setText(((BlockButton) v).getMines_count());
                     }
                 });
                 buttons[i][j].setLayoutParams
